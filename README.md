@@ -46,6 +46,7 @@
 
 本專案採用 **前後端分離 (Frontend-Backend Separation)** 架構，適合部署於 Render 等現代雲端平台。
 
+```
 AgentBook/
 ├── backend/                  # Python 後端 (FastAPI + LangChain)
 │   ├── AgentBook_DualLayer.py    # [核心] 社交模擬引擎 (Social Engine + Agent Brain)
@@ -73,6 +74,7 @@ AgentBook/
 │   └── dist/                     # Build 產出檔案 (Render 部署用)
 │
 └── README.md                 # 專案總說明文件
+```
 
 ---
 
