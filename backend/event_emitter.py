@@ -8,11 +8,18 @@ import json
 from typing import Dict, Optional
 from datetime import datetime
 
+import os
+
 class EventEmitter:
     """事件发送器"""
     
-    def __init__(self, server_url: str = "http://localhost:8000"):
-        self.server_url = server_url
+    def __init__(self, server_url: str = None):
+        if server_url is None:
+            port = os.environ.get("PORT", "8000")
+            self.server_url = f"http://localhost:{port}"
+        else:
+            self.server_url = server_url
+            
         self.enabled = self._check_server_available()
     
     def _check_server_available(self) -> bool:
