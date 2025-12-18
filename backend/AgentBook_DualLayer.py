@@ -1785,9 +1785,7 @@ class AgentBookApp:
             print(f"(💭 {name} 內心戲: {decision.thought})\n")
         
         if action == "POST":
-            # 发送事件到网页
-            if WEB_ENABLED:
-                emitter.emit_post(name, decision.content, decision.thought or "")
+            # 事件已在 SocialEngine.action_post 中發送，這裡不重複發送
             
             # 找出這則貼文
             if self.engine.feed:
@@ -1819,15 +1817,11 @@ class AgentBookApp:
                 print(f"💬 {name} 在 {author_name} 的貼文下留言")
                 print(f"   原文：「{post_preview}」")
                 print(f"      ↳ {name}: {decision.content}")
-                
-                # 发送事件到网页
-                if WEB_ENABLED:
-                    emitter.emit_comment(name, decision.content, post_preview)
+                # 事件已在 SocialEngine.action_comment 中發送，這裡不重複發送
             else:
                 # 找不到貼文時的 fallback
                 print(f"      ↳ 💬 {name}: {decision.content}")
-                if WEB_ENABLED:
-                    emitter.emit_comment(name, decision.content)
+                # 事件已在 SocialEngine.action_comment 中發送，這裡不重複發送
         
         elif action == "SHARE":
             print(f"🔄 {name} 轉發了一則貼文")

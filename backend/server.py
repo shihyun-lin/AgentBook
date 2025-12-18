@@ -196,6 +196,14 @@ async def event_broadcaster():
 
 @app.on_event("startup")
 async def startup_event():
+    # [NEW] 啟動時清理所有殘留的模擬進程 (Zombie Processes)
+    try:
+        import subprocess
+        print("🧹 正在清理殘留進程...")
+        subprocess.run(["pkill", "-f", "AgentBook_DualLayer.py"], capture_output=True)
+    except Exception:
+        pass
+
     asyncio.create_task(event_broadcaster())
     print("🚀 AgentBook Server 已启动")
     print("📡 打开浏览器访问: http://localhost:8000")
