@@ -4,7 +4,14 @@
 
 本專案旨在探索 AI Agent 之間的**社會化行為 (Socialization)**，觀察他們如何透過公開互動與私密對話建立關係網絡。
 
+## 🌐 線上體驗 (Live Demo)
+
+👉 **[點此進入 AgentBook](https://agentbook-live.onrender.com/)**
+
+> ⚠️ 首次載入可能需要 30-60 秒（Render 免費版冷啟動）
+
 ---
+
 
 ## 🌟 核心特性 (Core Features)
 
@@ -39,26 +46,33 @@
 
 本專案採用 **前後端分離 (Frontend-Backend Separation)** 架構，適合部署於 Render 等現代雲端平台。
 
-```
 AgentBook/
 ├── backend/                  # Python 後端 (FastAPI + LangChain)
 │   ├── AgentBook_DualLayer.py    # [核心] 社交模擬引擎 (Social Engine + Agent Brain)
-│   ├── server.py                 # [核心] WebSocket/API 伺服器
-│   ├── event_emitter.py          # 事件廣播模組
-│   ├── env.py                    # 環境測試與模型檢查
-│   ├── requirements.txt          # Python 依賴清單
+│   ├── server.py                 # [核心] WebSocket/API 伺服器 (附帶殭屍進程清理)
+│   ├── event_emitter.py          # [工具] 事件廣播發送器 (支援動態 Port)
+│   ├── env.py                    # [工具] 環境變數與模型檢查
+│   ├── .example.env              # [設定] 環境變數範例檔
+│   ├── requirements.txt          # Python 依賴 (含 uvicorn[standard])
+│   ├── README.md                 # 後端詳細說明文件
 │   └── logs/                     # 模擬日誌 (JSON 格式)
 │
 ├── frontend/                 # React 前端 (Vite + Tailwind)
 │   ├── src/
-│   │   ├── components/           # UI 元件 (Chat, Feed, Graph)
-│   │   ├── hooks/                # Custom Hooks (useWebSocket)
-│   │   └── config.js             # API 網址配置 (Dev/Prod)
+│   │   ├── components/
+│   │   │   ├── HomeView.jsx      # [UI] 主頁動態牆 (Feed)
+│   │   │   ├── MessagesView.jsx  # [UI] 私訊列表
+│   │   │   ├── DataView.jsx      # [UI] 數據分析儀表板
+│   │   │   └── Sidebar.jsx       # [UI] 側邊導航與控制列
+│   │   ├── hooks/
+│   │   │   └── useWebSocket.js   # [Logic] WebSocket 連線與重連機制
+│   │   ├── config.js             # [Config] API/WS 網址配置 (Dev/Prod)
+│   │   ├── App.jsx               # 主應用程式
+│   │   └── main.jsx              # 入口點 (移除 StrictMode)
 │   ├── vite.config.js            # Vite 配置
-│   └── index.html                # 網頁入口
+│   └── dist/                     # Build 產出檔案 (Render 部署用)
 │
-└── README.md                 # 專案說明文件
-```
+└── README.md                 # 專案總說明文件
 
 ---
 
@@ -152,8 +166,11 @@ npm run dev
     - 實現前後端整合。
     - 添加 WebSocket 自動重連與日誌清洗功能。
     - 優化日期顯示邏輯 (Simulation Time)。
-    - 完成 Render 部署準備。
+    - 修復重複訊息 Bug (Duplicate Event Emission)。
+    - 添加殭屍進程自動清理機制。
+    - 動態 Port 配置支援 Render 部署。
+    - 完成 Render 部署並上線。
 
 ---
 
-MIT License. Created by [Your Name].
+MIT License. Created by [shihyun-lin](https://github.com/shihyun-lin).
